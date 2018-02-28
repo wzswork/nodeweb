@@ -8,14 +8,18 @@ var bodyParser = require('body-parser');
 var index = require('./routes/index');
 var users = require('./routes/users');
 
+const resolve = file => path.resolve(__dirname, file)
+
 var app = express();
 
 // view engine setup
-app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'jade');
+app.set('views', path.join(__dirname, 'views/'));  
+app.engine('.html', require('ejs').renderFile);  
+app.set('view engine', 'html');  
 
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
+app.use('/static', express.static(resolve('./static')))
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -43,4 +47,11 @@ app.use(function(err, req, res, next) {
   res.render('error');
 });
 
-module.exports = app;
+app.get('*', function(req, res, next){
+  let html = fs.readFileSync(resolve('./views/' + 'index.html'), 'utf-8')
+  res.send(html)
+})
+
+app.listen(7000)
+
+// module.exports = app;
