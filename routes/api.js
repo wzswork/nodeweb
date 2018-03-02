@@ -1,12 +1,11 @@
 'use strict'
 
 import express from 'express'
-import apiController from '../controller/api'
+import ApiController from '../controller/apiController'
 
 const router = express.Router();
+// router.get('/digest/*', apiHandle.getDigest);
+router.get('/labels', ApiController.getLabels);
+// router.get('/article/:id', apiHandle.getArticleById);
 
-router.get('/digest/*', apiController.getDigest);
-router.get('/labels', apiController.getLabels);
-router.get('/article/:id', apiController.getArticleById);
-
-module.exports = router
+export default router
