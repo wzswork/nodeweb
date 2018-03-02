@@ -4,9 +4,7 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
-
-var index = require('./routes/index');
-var users = require('./routes/users');
+var router = require('./routes/index');
 
 const resolve = file => path.resolve(__dirname, file)
 
@@ -26,9 +24,6 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', index);
-app.use('/users', users);
-
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   var err = new Error('Not Found');
@@ -47,10 +42,7 @@ app.use(function(err, req, res, next) {
   res.render('error');
 });
 
-app.get('*', function(req, res, next){
-  let html = fs.readFileSync(resolve('./views/' + 'index.html'), 'utf-8')
-  res.send(html)
-})
+router(app);
 
 app.listen(7000)
 

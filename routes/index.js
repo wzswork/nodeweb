@@ -1,9 +1,10 @@
-var express = require('express');
-var router = express.Router();
+import apiRouter from './api'
 
-/* GET home page. */
-router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Express' });
-});
 
-module.exports = router;
+export default app=>{
+  app.get('/', function(req, res, next){
+    let html = fs.readFileSync(resolve('./views/' + 'index.html'), 'utf-8')
+    res.send(html)
+  })
+  app.use('/api', apiRouter)
+}
