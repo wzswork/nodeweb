@@ -46,4 +46,4 @@ router(app);
 
 app.listen(7000)
 
-// module.exports = app;
+module.exports = app;
