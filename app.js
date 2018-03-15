@@ -4,6 +4,7 @@ import favicon from 'serve-favicon'
 import logger from 'morgan'
 import cookieParser from 'cookie-parser'
 import bodyParser from 'body-parser'
+import session from 'express-session'
 import router from './routes/index'
 
 const resolve = file => path.resolve(__dirname, file)
