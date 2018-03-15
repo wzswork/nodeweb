@@ -4,7 +4,8 @@
   "private": true,
   "scripts": {
     "start": "cross-env NODE_ENV=production pm2 start index.js",
-    "dev": "cross-env NODE_ENV=development nodemon index.js"
+    "dev": "cross-env NODE_ENV=development nodemon index.js",
+    "restart": "cross-env NODE_ENV=production pm2 restart index.js"
   },
   "dependencies": {
     "babel-cli": "^6.26.0",
