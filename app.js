@@ -30,6 +30,22 @@ app.all('*', (req, res, next) => {
 	  next();
 	}
 });
+
+const MongoStore = connectMongo(session);
+app.use(cookieParser());
+app.use(session({
+	  name: config.session.name,
+		secret: config.session.secret,
+		resave: true,
+		saveUninitialized: false,
+		cookie: config.session.cookie,
+		store: new MongoStore({
+	  url: config.url
+	})
+}))
+
+
+
 app.use('/static', express.static(resolve('./static')))
 app.use(logger('dev'));
 app.use(bodyParser.json());
